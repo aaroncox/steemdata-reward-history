@@ -1,7 +1,7 @@
 load('config.js')
 load('helpers.js')
 
-header(['date', 'vests'])
+header(['date', 'vests', 'sp', 'usd_steem_gain', 'usd_sbd_gain', 'usd_total_gain'])
 
 db.Operations.aggregate([
   {$match: {
