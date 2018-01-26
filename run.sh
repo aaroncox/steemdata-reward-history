@@ -8,4 +8,7 @@ echo "... exporting curation rewards"
 mongo mongodb://mongo1.steemdata.com:27017/SteemData -u steemit -p steemit --quiet queries/curation_rewards.js > output/curation_rewards.csv
 echo "... exporting witness rewards"
 mongo mongodb://mongo1.steemdata.com:27017/SteemData -u steemit -p steemit --quiet queries/witness_rewards.js > output/witness_rewards.csv
+echo "... exporting vesting withdraws"
+mongo mongodb://mongo1.steemdata.com:27017/SteemData -u steemit -p steemit --quiet queries/vesting_withdraw.js > output/vesting_withdraw.csv
+
 echo "Completed, CSVs can be found within the ./output folder. Running the script again will replace these files, so if you're performing this for multiple accounts make sure to copy them first."

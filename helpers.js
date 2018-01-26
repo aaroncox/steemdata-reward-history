@@ -38,14 +38,13 @@ function steem_to_usd(doc) {
   if(doc.steem) {
     usd += steem_history[date] * doc.steem
   }
-  return usd
+  return usd.toFixed(2)
 }
 
 function sbd_to_usd(doc) {
   date = [doc['_id']['year'], doc['_id']['month'], doc['_id']['day']].join('-')
-  usd = 0
   if(doc.sbd) {
-    usd += sbd_history[date] * doc.sbd
+    return (sbd_history[date] * doc.sbd).toFixed(2)
   }
-  return usd
+  return 0
 }
