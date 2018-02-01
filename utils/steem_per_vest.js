@@ -10,17 +10,27 @@ db.Operations.aggregate([
   }},
   {$project: {
     timestamp: 1,
-    steem_per_vest: {
-      $divide: ['$deposited.amount', '$withdrawn.amount']
-    }
+    'deposited.amount': 1,
+    'withdrawn.amount': 1,
+    same_account: {
+      $cmp: ['$to_account', '$from_account']
+    },
+  }},
+  {$match: {
+    same_account: 0
   }},
   {$group: {
     _id: {
       $dateToString: { format: "%Y-%m-%d", date: "$timestamp" }
     },
+    vests: {$sum: '$deposited.amount'},
+    steem: {$sum: '$withdrawn.amount'}
+  }},
+  {$project: {
+    _id: 1,
     rate: {
-      $avg: '$steem_per_vest'
-    },
+      $divide: ['$vests', '$steem']
+    }
   }},
   {$sort: {
     _id: -1,
